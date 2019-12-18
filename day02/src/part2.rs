@@ -47,7 +47,7 @@ pub fn part2() {
 
             thread::spawn(move || {
                 if process_data(data, i, j) == 19690720 {
-                    s.send((i, j)).ok();
+                    s.send((i, j)).unwrap();
                 }
             });
         }
