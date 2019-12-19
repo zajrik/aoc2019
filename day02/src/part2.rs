@@ -55,5 +55,5 @@ pub fn part2() {
 
     let result: (u32, u32) = receiver.recv().unwrap();
 
-    println!("noun: {}, verb: {}", result.0, result.1);
+    println!("{}", result.0 * 100 + result.1);
 }

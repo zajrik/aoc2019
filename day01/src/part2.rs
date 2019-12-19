@@ -22,8 +22,8 @@ pub fn part2() {
             fuel_fuel_reqs.push(req as u32);
         }
 
-        fuel_reqs.push(fuel_fuel_reqs.iter().fold(0, |a, b| a + b));
+        fuel_reqs.push(fuel_fuel_reqs.iter().sum());
     }
 
-    println!("{}", fuel_reqs.iter().fold(0, |a, b| a + b));
+    println!("{}", fuel_reqs.iter().sum::<u32>());
 }
