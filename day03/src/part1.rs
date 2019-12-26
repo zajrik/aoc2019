@@ -63,7 +63,7 @@ fn process_wire_segments(segments: Vec<WireSegment>) -> HashSet<Point> {
                 start = Point::new(start.x + segment.length as i32, start.y);
             }
             Direction::Down => {
-                for n in (start.x - segment.length as i32)..=start.x {
+                for n in ((start.x - segment.length as i32)..=start.x).rev() {
                     points.insert(Point::new(n, start.y));
                 }
                 start = Point::new(start.x - segment.length as i32, start.y);
@@ -75,7 +75,7 @@ fn process_wire_segments(segments: Vec<WireSegment>) -> HashSet<Point> {
                 start = Point::new(start.x, start.y + segment.length as i32);
             }
             Direction::Left => {
-                for n in (start.y - segment.length as i32)..=start.y {
+                for n in ((start.y - segment.length as i32)..=start.y).rev() {
                     points.insert(Point::new(start.x, n));
                 }
                 start = Point::new(start.x, start.y - segment.length as i32);
