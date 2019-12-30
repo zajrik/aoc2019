@@ -11,30 +11,17 @@ struct Instruction {
 
 impl Instruction {
     fn from(instruction: i32) -> Instruction {
-        let mut ints: Vec<u8> = instruction
-            .to_string()
-            .chars()
-            .map(|c| c.to_string().parse::<u8>().unwrap())
-            .collect::<Vec<u8>>();
-
-        let op2: u8 = ints.pop().unwrap();
-        let op1: u8 = match ints.pop() {
-            Some(val) => val,
-            None => 0,
-        };
-
-        let op: u8 = format!("{}{}", op1, op2).parse::<u8>().unwrap();
-        let p1: Mode = Instruction::mode(ints.pop());
-        let p2: Mode = Instruction::mode(ints.pop());
+        let op: u8 = (instruction % 100) as u8;
+        let p1: Mode = Instruction::mode((instruction / 100 % 10) as u8);
+        let p2: Mode = Instruction::mode((instruction / 1000) as u8);
 
         Instruction { op, p1, p2 }
     }
 
-    fn mode(int: Option<u8>) -> Mode {
+    fn mode(int: u8) -> Mode {
         match int {
-            Some(1) => Mode::Immediate,
-            Some(0) => Mode::Position,
-            None => Mode::Position,
+            1 => Mode::Immediate,
+            0 => Mode::Position,
             _ => panic!("Invalid mode"),
         }
     }
