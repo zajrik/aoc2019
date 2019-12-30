@@ -47,6 +47,7 @@ pub fn part1() -> Result<i32, std::io::Error> {
         let instruction: Instruction = Instruction::from(input[ptr]);
 
         match instruction.op {
+            // Add
             1 => {
                 let val1: i32 = Instruction::get_value(&input, ptr + 1, instruction.p1);
                 let val2: i32 = Instruction::get_value(&input, ptr + 2, instruction.p2);
@@ -54,6 +55,8 @@ pub fn part1() -> Result<i32, std::io::Error> {
                 input[idx as usize] = val1 + val2;
                 ptr += 4;
             }
+
+            // Multiply
             2 => {
                 let val1: i32 = Instruction::get_value(&input, ptr + 1, instruction.p1);
                 let val2: i32 = Instruction::get_value(&input, ptr + 2, instruction.p2);
@@ -61,17 +64,27 @@ pub fn part1() -> Result<i32, std::io::Error> {
                 input[idx as usize] = val1 * val2;
                 ptr += 4;
             }
+
+            // Write input to memory
             3 => {
                 let idx: i32 = Instruction::get_value(&input, ptr + 1, Mode::Immediate);
+
+                // Simulate input of 1
                 input[idx as usize] = 1;
+
                 ptr += 2;
             }
+
+            // Output from memory
             4 => {
                 let val: i32 = Instruction::get_value(&input, ptr + 1, instruction.p1);
                 out = val;
                 ptr += 2;
             }
+
+            // Exit
             99 => break,
+
             _ => panic!("Invalid opcode"),
         }
     }
