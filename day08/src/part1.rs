@@ -1,6 +1,6 @@
 pub fn part1() -> Result<usize, std::io::Error> {
     let input: &str = include_str!("./input.txt");
-    let layer_size: usize = 2 * 2;
+    let layer_size: usize = 25 * 6;
     let layers: Vec<Vec<u8>> = vec![""; input.len() / layer_size]
         .iter()
         .enumerate()
